@@ -1,115 +1,65 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ข้อมูลนักศึกษา</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อมูลส่วนตัวนักศึกษา</title>
   <style>
     body {
-      font-family: sans-serif;
-      padding: 20px;
-      background-color: #f5f5f5;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
     }
-    .student-card {
-      background-color: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      gap: 15px;
+
+    .profile-card {
+      background-color: #fff;
+      max-width: 500px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      text-align: center;
     }
-    .student-card img {
-      width: 80px;
-      height: 80px;
+
+    .profile-card img {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
+      border: 3px solid #3498db;
+      margin-bottom: 20px;
     }
-    h2 {
+
+    .profile-card h2 {
+      margin: 10px 0 5px;
       color: #2c3e50;
     }
-    button {
-      padding: 10px 15px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+
+    .profile-card p {
+      margin: 5px 0;
+      color: #555;
+      font-size: 16px;
     }
-    button:hover {
-      background-color: #2980b9;
+
+    .profile-card .email {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2980b9;
     }
   </style>
 </head>
 <body>
 
-  <h2>ข้อมูลนักศึกษาแบบสุ่ม</h2>
-  <button onclick="generateStudents()">สุ่มข้อมูลนักศึกษา</button>
+  <div class="profile-card">
+    <!-- 🔁 เปลี่ยนลิงก์ภาพตรง src ได้ -->
+    <img src="https://i.pravatar.cc/300?img=12" alt="My Profile Picture">
 
-  <div id="student-list"></div>
+    <h2>พัฒนพงศ์ ชัยสวัสดิ์</h2>
+    <p><strong>รหัสนักศึกษา:</strong> 6512345678</p>
+    <p><strong>ชั้นปี:</strong> ปี 3</p>
+    <p><strong>สาขา:</strong> วิทยาการคอมพิวเตอร์</p>
+    <p class="email">6512345678@student.university.ac.th</p>
+  </div>
 
-  <script>
-    const firstNames = ["ณัฐวุฒิ", "พีรดนย์", "สุภาวดี", "ชุติมา", "ธีรภัทร", "ศิริพร", "อธิชา", "วราภรณ์", "กิตติพงษ์", "ธนกฤต"];
-    const lastNames = ["ศรีสวัสดิ์", "วงศ์ทอง", "บุญเกิด", "วัฒนชัย", "เกษมสุข", "อินทร์แก้ว", "ตั้งมั่น", "จันทร์เพ็ญ", "สิงห์โต", "ปราชญ์เจริญ"];
-    const majors = ["วิทยาการคอมพิวเตอร์", "เทคโนโลยีสารสนเทศ", "วิศวกรรมซอฟต์แวร์", "ระบบสารสนเทศ", "วิศวกรรมคอมพิวเตอร์"];
-    const years = [1, 2, 3, 4];
-
-    // ใช้รูปสุ่มจากเว็บไซต์ avatar API (แบบไม่มีบัญชี)
-    const avatarUrls = [
-      "https://i.pravatar.cc/150?img=1",
-      "https://i.pravatar.cc/150?img=2",
-      "https://i.pravatar.cc/150?img=3",
-      "https://i.pravatar.cc/150?img=4",
-      "https://i.pravatar.cc/150?img=5",
-      "https://i.pravatar.cc/150?img=6",
-      "https://i.pravatar.cc/150?img=7",
-      "https://i.pravatar.cc/150?img=8",
-      "https://i.pravatar.cc/150?img=9",
-      "https://i.pravatar.cc/150?img=10"
-    ];
-
-    function getRandomItem(array) {
-      return array[Math.floor(Math.random() * array.length)];
-    }
-
-    function generateStudentId(year) {
-      const facultyCode = "01";
-      const majorCode = String(Math.floor(Math.random() * 5) + 1).padStart(2, '0');
-      const studentNumber = String(Math.floor(Math.random() * 9999) + 1).padStart(4, '0');
-      const yearPrefix = String(65 - (year - 1));
-      return `${yearPrefix}${facultyCode}${majorCode}${studentNumber}`;
-    }
-
-    function generateStudents() {
-      const container = document.getElementById('student-list');
-      container.innerHTML = '';
-
-      for (let i = 0; i < 5; i++) {
-        const firstName = getRandomItem(firstNames);
-        const lastName = getRandomItem(lastNames);
-        const year = getRandomItem(years);
-        const major = getRandomItem(majors);
-        const studentId = generateStudentId(year);
-        const email = `${studentId}@student.university.ac.th`;
-        const avatar = getRandomItem(avatarUrls);
-
-        const studentDiv = document.createElement('div');
-        studentDiv.className = 'student-card';
-        studentDiv.innerHTML = `
-          <img src="${avatar}" alt="Student Avatar">
-          <div>
-            <strong>ชื่อ:</strong> ${firstName}<br>
-            <strong>นามสกุล:</strong> ${lastName}<br>
-            <strong>รหัสนักศึกษา:</strong> ${studentId}<br>
-            <strong>ชั้นปี:</strong> ${year}<br>
-            <strong>สาขา:</strong> ${major}<br>
-            <strong>อีเมล:</strong> ${email}
-          </div>
-        `;
-        container.appendChild(studentDiv);
-      }
-    }
-  </script>
 </body>
 </html>
